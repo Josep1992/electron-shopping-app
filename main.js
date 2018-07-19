@@ -5,11 +5,11 @@ const path = require('path');
 let mainWindow;
 let addWindow;
 
-process.env.NODE_ENV = 'production';
+//process.env.NODE_ENV = 'production';
 
 //Main Window
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 600, height: 400 });
+  mainWindow = new BrowserWindow({ width: 650, height: 500 });
 
   //This method load the file relative to the path
   // mainWindow.loadFile('index.html');
@@ -30,9 +30,9 @@ function createWindow() {
   mainWindow.on('closed', () => app.quit());
 }
 
-//Add window
+// //Add window
 function createAddWindow() {
-  addWindow = new BrowserWindow({ width: 300, height: 300 });
+  addWindow = new BrowserWindow({ width: 300, height: 300, frame: false });
 
   addWindow.loadURL(
     url.format({
@@ -42,11 +42,6 @@ function createAddWindow() {
     }),
   );
 
-  //Adding the menu to the window
-  const menu = Menu.buildFromTemplate(mainMenu);
-  //Inserting the menu to the app
-  Menu.setApplicationMenu(menu);
-
   addWindow.on('closed', () => {
     //Remember to always set the window to null because of garbage collection
     addWindow = null;
@@ -54,7 +49,6 @@ function createAddWindow() {
 }
 
 ipcMain.on('item:add', function(e, item) {
-  console.log(item);
   mainWindow.webContents.send('item:add', item);
   addWindow.close();
 });
@@ -94,6 +88,7 @@ const mainMenu = [
           mainWindow.webContents.send('item:clear');
         },
       },
+      { type: 'separator' },
       {
         label: 'Quit',
         accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+q',
