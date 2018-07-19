@@ -91,7 +91,7 @@ const mainMenu = [
       {
         label: 'Clear Item',
         click() {
-          mainWindow.webContents.send('item:clear', item);
+          mainWindow.webContents.send('item:clear');
         },
       },
       {
