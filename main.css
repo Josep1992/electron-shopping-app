@@ -4,11 +4,34 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-body {
+body,
+html {
   background-color: #2b2e3b;
-  color: #9feaf9;
+  color: #fff;
+  padding: 1em;
 }
 
 form {
   padding: 1em;
+}
+
+.jumbotron {
+  color: #2b2e3b;
+}
+
+ul > li {
+  color: #2b2e3b;
+}
+
+i {
+  color: #2b2e3b;
+}
+
+img {
+  height: 40px;
+  width: auto;
+}
+
+span > i {
+  color: #fff;
 }
