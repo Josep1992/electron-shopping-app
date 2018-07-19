@@ -32,7 +32,7 @@ function createWindow() {
 
 // //Add window
 function createAddWindow() {
-  addWindow = new BrowserWindow({ width: 300, height: 300, frame: false });
+  addWindow = new BrowserWindow({ width: 300, height: 300 });
 
   addWindow.loadURL(
     url.format({
@@ -50,7 +50,7 @@ function createAddWindow() {
 
 ipcMain.on('item:add', function(e, item) {
   mainWindow.webContents.send('item:add', item);
-  addWindow.close();
+  // addWindow.close();
 });
 
 app.on('ready', createWindow);
