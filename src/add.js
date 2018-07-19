@@ -21,5 +21,6 @@ form.addEventListener('submit', (e) => {
   const item = e.target.elements.add.value;
 
   ipcRenderer.send('item:add', item);
+  e.target.reset();
   e.preventDefault();
 });
