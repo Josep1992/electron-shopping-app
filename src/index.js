@@ -11,8 +11,14 @@ const jumbotron = document.querySelector('.jumbotron');
 const addBtn = jumbotron.children[1];
 const deleteBtn = jumbotron.children[2];
 
+let addWindow;
+
 addBtn.addEventListener('click', () => {
-  let addWindow = new BrowserWindow({ width: 300, height: 300 });
+  addWindow = new BrowserWindow({
+    width: 300,
+    height: 300,
+    //frame: false,
+  });
   addWindow.on('close', () => (addWindow = null));
   addWindow.loadURL(
     url.format({
@@ -32,11 +38,25 @@ deleteBtn.addEventListener('click', () => {
 //Adding item
 ipcRenderer.on('item:add', (e, item) => {
   const li = document.createElement('li');
+  const span = document.createElement('span');
+  const i = document.createElement('i');
+
+  span.classList.add('badge', 'badge-danger', 'badge-pill');
+  i.classList.add('fas', 'fa-trash-alt');
+
+  span.appendChild(i);
 
   li.textContent = item;
-  li.classList.add('list-group-item');
+  li.appendChild(span);
+  li.classList.add(
+    'list-group-item',
+    'd-flex',
+    'justify-content-between',
+    'align-items-center',
+  );
 
   list.appendChild(li);
+  addWindow.close();
 });
 
 //Item Clear
@@ -44,6 +64,8 @@ ipcRenderer.on('item:clear', () => {
   list.innerHTML = '';
 });
 
-list.addEventListener('dblclick', function(e) {
-  e.target.remove();
+list.addEventListener('click', function(e) {
+  if (e.target.classList.contains('fa-trash-alt')) {
+    e.target.parentElement.parentElement.remove();
+  }
 });
