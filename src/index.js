@@ -56,7 +56,6 @@ ipcRenderer.on('item:add', (e, item) => {
   );
 
   list.appendChild(li);
-  addWindow.close();
 });
 
 //Item Clear
