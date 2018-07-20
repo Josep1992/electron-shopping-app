@@ -52,7 +52,7 @@ ipcRenderer.on('item:add', (e, item) => {
 
   span.appendChild(i);
 
-  li.textContent = item;
+  li.textContent = `💩 ${item}`;
   li.appendChild(span);
   li.classList.add(
     'list-group-item',
@@ -93,4 +93,4 @@ setInterval(() => {
         card.classList.add('invisible');
       }
     });
-}, 120000);
+}, 9000);
