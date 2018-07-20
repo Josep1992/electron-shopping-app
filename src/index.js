@@ -3,10 +3,16 @@ const path = require('path');
 const url = require('url');
 const { ipcRenderer } = electron;
 
+const axios = require('axios');
+
 const BrowserWindow = electron.remote.BrowserWindow;
 
 const list = document.querySelector('#output');
 const jumbotron = document.querySelector('.jumbotron');
+const card = document.querySelector('.card');
+
+const card__title = card.children[0].children[0];
+const card__text = card.children[0].children[1];
 
 const addBtn = jumbotron.children[1];
 const deleteBtn = jumbotron.children[2];
@@ -68,3 +74,23 @@ list.addEventListener('click', function(e) {
     e.target.parentElement.parentElement.remove();
   }
 });
+
+async function getQuotes(url) {
+  const request = await axios.get(url);
+  return request;
+}
+
+setInterval(() => {
+  getQuotes('https://talaikis.com/api/quotes/random/')
+    .then((data) => {
+      card__title.innerText = `${data.data.author}`;
+      card__text.innerText = `${data.data.quote}`;
+      card.classList.remove('invisible');
+    })
+    .catch((error) => {
+      console.log({ error });
+      if (error) {
+        card.classList.add('invisible');
+      }
+    });
+}, 120000);
