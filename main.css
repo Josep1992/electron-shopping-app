@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
 * {
   font-family: 'Open Sans', sans-serif;
@@ -34,4 +35,10 @@ img {
 
 span > i {
   color: #fff;
+}
+
+.card-title,
+.card-text {
+  color: #333;
+  font-family: 'Pacifico', cursive;
 }
